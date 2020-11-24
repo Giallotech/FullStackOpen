@@ -32,9 +32,9 @@ const Statistics = (props) => {
 const Statistic = (props) => {
     return (
         <div>
-            <p>
+            <div>
                 {props.text} {props.value} {props.percent}
-            </p>
+            </div>
         </div>
     );
 };

@@ -16,12 +16,12 @@ const App = (props) => {
     };
     return (
         <div>
-            <p>{props.anecdotes[selected]}</p>
-            <p>has {points[selected]} votes</p>
-            <p>
+            <div>{props.anecdotes[selected]}</div>
+            <div>has {points[selected]} votes</div>
+            <div>
                 <button onClick={vote}>vote</button>
                 <button onClick={nextAnec}>next anecdote</button>
-            </p>
+            </div>
         </div>
     );
 };

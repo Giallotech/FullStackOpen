@@ -36,12 +36,12 @@ const App = () => {
             <button onClick={neutralclick}>neutral</button>
             <button onClick={badclick}>bad</button>
             <h1>statistics</h1>
-            <p>good {good}</p>
-            <p>neutral {neutral}</p>
-            <p>bad {bad}</p>
-            <p>all {all}</p>
-            <p>average {avg}</p>
-            <p>positive {pos} % </p>
+            <div>good {good}</div>
+            <div>neutral {neutral}</div>
+            <div>bad {bad}</div>
+            <div>all {all}</div>
+            <div>average {avg}</div>
+            <div>positive {pos} % </div>
         </div>
     );
 };

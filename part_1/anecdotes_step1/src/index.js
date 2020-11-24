@@ -10,10 +10,10 @@ const App = (props) => {
         );
     return (
         <div>
-            <p>{props.anecdotes[selected]}</p>
-            <p>
+            <div>{props.anecdotes[selected]}</div>
+            <div>
                 <button onClick={nextAnec}>next anecdote</button>
-            </p>
+            </div>
         </div>
     );
 };

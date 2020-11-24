@@ -10,24 +10,24 @@ const Statistics = (props) => {
     }
     return (
         <div>
-            <p>
+            <div>
                 {props.goodtext} {props.good}
-            </p>
-            <p>
+            </div>
+            <div>
                 {props.neutext} {props.neu}
-            </p>
-            <p>
+            </div>
+            <div>
                 {props.badtext} {props.bad}
-            </p>
-            <p>
+            </div>
+            <div>
                 {props.alltext} {props.all}
-            </p>
-            <p>
+            </div>
+            <div>
                 {props.avgtext} {props.avg}
-            </p>
-            <p>
+            </div>
+            <div>
                 {props.postext} {props.pos} {props.percent}
-            </p>
+            </div>
         </div>
     );
 };
