@@ -4,7 +4,7 @@ import axios from "axios";
 
 const App = () => {
 	const [countries, setCountries] = useState([]);
-	const [searchCountry, setSearchCountry] = useState("");
+	const [query, setQuery] = useState("");
 
 	useEffect(() => {
 		axios.get("https://restcountries.eu/rest/v2/all").then((response) => {
@@ -12,13 +12,17 @@ const App = () => {
 		});
 	}, []);
 
+	const handleSearch = (event) => {
+		setQuery(event.target.value);
+	};
+
 	const searchResults = countries.filter((country) =>
-		country.name.toLowerCase().includes(searchCountry.toLowerCase())
+		country.name.toLowerCase().includes(query.toLowerCase())
 	);
 
-	const toomany = () => <div>Too many matches, specify another filter</div>;
+	const tooMany = () => <div>Too many matches, specify another filter</div>;
 
-	const countrylist = () => {
+	const view = () => {
 		if (searchResults.length === 1) {
 			return (
 				<div>
@@ -50,13 +54,7 @@ const App = () => {
 			);
 	};
 	const matches =
-		searchResults.length > 0 && searchResults.length < 10
-			? countrylist
-			: toomany;
-
-	const handleSearch = (event) => {
-		setSearchCountry(event.target.value);
-	};
+		searchResults.length > 0 && searchResults.length < 10 ? view : tooMany;
 
 	return (
 		<div>
@@ -65,7 +63,7 @@ const App = () => {
 				<input
 					type="text"
 					placeholder="Search"
-					value={searchCountry}
+					value={query}
 					onChange={handleSearch}
 				></input>
 			</div>

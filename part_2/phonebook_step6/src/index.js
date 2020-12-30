@@ -64,34 +64,34 @@ const App = () => {
 		});
 	}, []);
 
+	const uniqueArr = [
+		...new Map(persons.map((item) => [item.name, item])).values(),
+	];
+
+	const searchResults = uniqueArr.filter((person) =>
+		person.name.toLowerCase().includes(searchName.toLowerCase())
+	);
+
 	const addName = (event) => {
 		event.preventDefault();
 		const nameObject = {
 			name: newName,
 			number: newNumber,
 		};
-		setPersons(persons.concat(nameObject));
-		uniqueArr.forEach((value) => {
-			if (value.name === newName) {
-				alert(`${newName} is already added to phonebook`);
-			}
-		});
-		setNewName("");
-		setNewNumber("");
+
+		const sameName = persons.find((item) => item.name === newName);
+
+		if (sameName) {
+			alert(`${newName} is already added to phonebook`);
+			setNewName("");
+			setNewNumber("");
+		} else {
+			setPersons(persons.concat(nameObject));
+			setNewName("");
+			setNewNumber("");
+		}
 	};
 
-	const uniqueArr = persons.reduce((init, current) => {
-		const duplicate = init.find((item) => item.name === current.name);
-		if (!duplicate) {
-			return init.concat([current]);
-		} else {
-			return init;
-		}
-	}, []);
-
-	const searchResults = uniqueArr.filter((person) =>
-		person.name.toLowerCase().includes(searchName.toLowerCase())
-	);
 	const handleNameChange = (event) => {
 		setNewName(event.target.value);
 	};

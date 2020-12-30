@@ -8,24 +8,29 @@ const App = () => {
 	const [newName, setNewName] = useState("");
 	const [newNumber, setNewNumber] = useState("");
 
+	const uniqueArr = [
+		...new Map(persons.map((item) => [item.name, item])).values(),
+	];
+
 	const addName = (event) => {
 		event.preventDefault();
 		const nameObject = {
 			name: newName,
 			number: newNumber,
 		};
-		setPersons(persons.concat(nameObject));
-		uniqueArr.forEach((value) => {
-			if (value.name === newName) {
-				alert(`${newName} is already added to phonebook`);
-			}
-		});
-		setNewName("");
-		setNewNumber("");
+		const sameName = persons.find((item) => item.name === newName);
+
+		if (sameName) {
+			alert(`${newName} is already added to phonebook`);
+			setNewName("");
+			setNewNumber("");
+		} else {
+			setPersons(persons.concat(nameObject));
+			setNewName("");
+			setNewNumber("");
+		}
 	};
-	const uniqueArr = [
-		...new Map(persons.map((item) => [item.name, item])).values(),
-	];
+
 	const handleNameChange = (event) => {
 		setNewName(event.target.value);
 	};
