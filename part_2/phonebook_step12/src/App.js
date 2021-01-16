@@ -13,27 +13,27 @@ const App = () => {
   const [notification, setNotification] = useState(null)
 
   useEffect(() => {
-    noteService.getAll().then((response) => {
+    noteService.getAll().then(response => {
       setPersons(response.data)
     })
   }, [])
 
   const uniqueArr = [
-    ...new Map(persons.map((item) => [item.name, item])).values(),
+    ...new Map(persons.map(item => [item.name, item])).values(),
   ]
 
-  const searchResults = uniqueArr.filter((person) =>
+  const searchResults = uniqueArr.filter(person =>
     person.name.toLowerCase().includes(searchName.toLowerCase())
   )
 
-  const addName = (event) => {
+  const addName = event => {
     event.preventDefault()
     const nameObject = {
       name: newName,
       number: newNumber,
     }
 
-    const name = persons.find((item) => item.name === newName)
+    const name = persons.find(item => item.name === newName)
 
     const changedNumber = { ...name, number: newNumber }
 
@@ -45,11 +45,9 @@ const App = () => {
       ) {
         noteService
           .update(name.id, changedNumber)
-          .then((response) => {
+          .then(response => {
             setPersons(
-              persons.map((item) =>
-                item.id !== name.id ? item : response.data
-              )
+              persons.map(item => (item.id !== name.id ? item : response.data))
             )
             setNewName('')
             setNewNumber('')
@@ -61,7 +59,7 @@ const App = () => {
               setNotification(null)
             }, 5000)
           })
-          .catch((error) => {
+          .catch(error => {
             setNotification({
               text: `Information of ${newName} has already been removed from server`,
               value: 'error',
@@ -74,7 +72,7 @@ const App = () => {
           })
       }
     } else {
-      noteService.create(nameObject).then((response) => {
+      noteService.create(nameObject).then(response => {
         setPersons(persons.concat(response.data))
         setNewName('')
         setNewNumber('')
@@ -89,19 +87,19 @@ const App = () => {
     }
   }
 
-  const handleNameChange = (event) => {
+  const handleNameChange = event => {
     setNewName(event.target.value)
   }
-  const handleNumberChange = (event) => {
+  const handleNumberChange = event => {
     setNewNumber(event.target.value)
   }
-  const handleSearch = (event) => {
+  const handleSearch = event => {
     setSearchName(event.target.value)
   }
-  const handleClick = (placeholder) => {
+  const handleClick = placeholder => {
     if (window.confirm(`Delete ${placeholder.name} ?`)) {
       noteService.erase(placeholder.id).then(() => {
-        setPersons(searchResults.filter((item) => item.id !== placeholder.id))
+        setPersons(searchResults.filter(item => item.id !== placeholder.id))
       })
     }
   }
