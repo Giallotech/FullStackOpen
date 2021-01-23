@@ -1,17 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 const Header = ({ course }) => {
-  return (
-    <h1>{course.name}</h1>
-  )
+  return <h1>{course.name}</h1>
 }
 
 const Part = (props) => {
   return (
     <p>
       {props.part.name} {props.part.exercises}
-    </p>    
+    </p>
   )
 }
 
@@ -34,38 +32,40 @@ const App = () => {
       {
         name: 'Fundamentals of React',
         exercises: 10,
-        id: 1
+        id: 1,
       },
       {
         name: 'Using props to pass data',
         exercises: 7,
-        id: 2
+        id: 2,
       },
       {
         name: 'State of a component',
         exercises: 14,
-        id: 3
+        id: 3,
       },
       {
-      name: 'Redux',
-      exercises: 11,
-      id: 4
-      }
-    ]
+        name: 'Redux',
+        exercises: 11,
+        id: 4,
+      },
+    ],
   }
-  
 
-  const exe = course.parts.map(part => part.exercises)
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const exe = course.parts.map((part) => part.exercises)
+  const reducer = (accumulator, currentValue) => accumulator + currentValue
   const sum = exe.reduce(reducer)
-  return(
+  return (
     <div>
       <Course course={course} />
-      <p><b>total of  {sum} exercises</b></p>
-    </div>)
+      <p>
+        <b>total of {sum} exercises</b>
+      </p>
+    </div>
+  )
 }
 
-const Course = ({course}) => {
+const Course = ({ course }) => {
   return (
     <div>
       <Header course={course} />
