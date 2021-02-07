@@ -9,9 +9,7 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 
 beforeEach(async () => {
-  await Blog.deleteMany({
-  })
-
+  await Blog.deleteMany({})
   const blogObjects = helper.initialBlogs
     .map(blog => new Blog(blog))
   const promiseArray = blogObjects.map(blog => blog.save())
@@ -105,9 +103,7 @@ describe('updating the likes of a blog', () => {
   test('succeeds with status code 200 if id is valid', async () => {
     const blogsAtStart = await helper.blogsInDb()
     const blogToUpdate = blogsAtStart[0]
-    const blog = {
-      likes: 37,
-    }
+    const blog = { likes: 37, }
 
     await api
       .put(`/api/blogs/${blogToUpdate.id}`)

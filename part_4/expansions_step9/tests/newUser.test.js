@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const supertest = require('supertest')
@@ -7,13 +8,12 @@ const api = supertest(app)
 
 describe('when there is initially one user in db', () => {
   beforeEach(async () => {
-    await User.deleteMany({
-    })
+    await User.deleteMany({})
 
     const passwordHash = await bcrypt.hash('sekret', 10)
     const user = new User({
       username: 'root',
-      passwordHash
+      passwordHash,
     })
 
     await user.save()
@@ -60,4 +60,7 @@ describe('when there is initially one user in db', () => {
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
+})
+afterAll(() => {
+  mongoose.connection.close()
 })

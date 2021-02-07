@@ -7,9 +7,7 @@ module.exports = {
   },
   extends: ['eslint:recommended', 'prettier'],
   plugins: ['prettier'],
-  parserOptions: {
-    ecmaVersion: 12,
-  },
+  parserOptions: { ecmaVersion: 12 },
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
@@ -18,20 +16,19 @@ module.exports = {
     eqeqeq: 'error',
     'no-trailing-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
-    'object-curly-newline': ['error', 'always'],
-    'arrow-spacing': ['error', {
-      before: true,
-      after: true
-    }],
+    'object-curly-newline': ['error', { multiline: true }],
+    'arrow-spacing': [
+      'error',
+      {
+        before: true,
+        after: true,
+      },
+    ],
     'no-console': 0,
     'multiline-ternary': ['error', 'always'],
     'arrow-parens': ['error', 'as-needed'],
-    'no-multiple-empty-lines': ['error', {
-      max: 1
-    }],
+    'no-multiple-empty-lines': ['error', { max: 1 }],
     'object-property-newline': 'error',
-    'lines-around-comment': ['error', {
-      'beforeBlockComment': true
-    }],
+    'lines-around-comment': ['error', { beforeBlockComment: true }],
   },
 }
