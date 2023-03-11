@@ -77,7 +77,6 @@ const App = () => {
   }
 
   const searchResults = persons.filter(item => item.name.toLowerCase().includes(newSearch.toLowerCase()))
-  console.log(searchResults)
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
