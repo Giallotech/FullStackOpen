@@ -47,7 +47,7 @@ const App = () => {
           })
           .catch(error => {
             setNotification({
-              text: `Information of ${newName} has already been removed from server`,
+              text: error.response.data.error,
               value: 'error',
             })
             setTimeout(() => {
@@ -72,6 +72,17 @@ const App = () => {
           setTimeout(() => {
             setNotification(null)
           }, 5000)
+        })
+        .catch(error => {
+          setNotification({
+            text: error.response.data.error,
+            value: 'error',
+          })
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
+          setNewName('')
+          setNewNumber('')
         })
     }
   }
