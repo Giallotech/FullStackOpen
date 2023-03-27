@@ -1,9 +1,0 @@
-POST  http://localhost:3003/api/blogs
-Content-Type: application/json
-
-{
-		"title": "Removing duplicates in an Array of Objects in JS with Sets",
-		"author": "Marina Mosti",
-    "url": "https://dev.to/marinamosti/removing-duplicates-in-an-array-of-objects-in-js-with-sets-3fep",
-    "likes": "75"
-}
