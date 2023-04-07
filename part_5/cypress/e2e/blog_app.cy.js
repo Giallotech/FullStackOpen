@@ -1,6 +1,6 @@
 describe('Blog app', function () {
   beforeEach(function () {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`)
     const firstUser = {
       username: 'mluukkai',
       name: 'Matti Luukkainen',
@@ -13,13 +13,13 @@ describe('Blog app', function () {
       password: 'secret'
     }
 
-    cy.request('POST', 'http://localhost:3003/api/users/', firstUser)
-    cy.request('POST', 'http://localhost:3003/api/users/', secondUser)
-    cy.visit('http://localhost:3000')
+    cy.request('POST', `${Cypress.env('BACKEND')}/users/`, firstUser)
+    cy.request('POST', `${Cypress.env('BACKEND')}/users/`, secondUser)
+    cy.visit('')
   })
 
   it('Login form is shown', function () {
-    cy.visit('http://localhost:3000')
+    cy.visit('')
     cy.contains('username')
     cy.contains('password')
   })
