@@ -28,13 +28,7 @@ const counterReducer = (state = initialState, action) => {
       }
       return incrementBad
     case 'ZERO':
-      const resetStats = {
-        ...state,
-        good: 0,
-        ok: 0,
-        bad: 0
-      }
-      return resetStats
+      return action.payload
     default: return state
   }
 }

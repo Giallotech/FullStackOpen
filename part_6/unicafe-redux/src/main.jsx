@@ -28,6 +28,11 @@ const App = () => {
   const resetStats = () => {
     store.dispatch({
       type: 'ZERO',
+      payload: {
+        good: 0,
+        ok: 0,
+        bad: 0,
+      },
     });
   };
 

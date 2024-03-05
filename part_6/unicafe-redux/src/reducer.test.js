@@ -20,61 +20,65 @@ describe('unicafe reducer', () => {
 
   test('good is incremented', () => {
     const action = {
-      type: 'GOOD'
+      type: 'GOOD',
+      payload: {
+        good: 1,
+        ok: 0,
+        bad: 0
+      }
     }
     const state = initialState
 
     deepFreeze(state)
     const newState = counterReducer(state, action)
-    expect(newState).toEqual({
-      good: 1,
-      ok: 0,
-      bad: 0
-    })
+    expect(newState).toEqual(action.payload)
   })
 
   test('ok is incremented', () => {
     const action = {
-      type: 'OK'
+      type: 'OK',
+      payload: {
+        good: 0,
+        ok: 1,
+        bad: 0
+      }
     }
     const state = initialState
 
     deepFreeze(state)
     const newState = counterReducer(state, action)
-    expect(newState).toEqual({
-      good: 0,
-      ok: 1,
-      bad: 0
-    })
+    expect(newState).toEqual(action.payload)
   })
 
   test('bad is incremented', () => {
     const action = {
-      type: 'BAD'
+      type: 'BAD',
+      payload: {
+        good: 0,
+        ok: 0,
+        bad: 1
+      }
     }
     const state = initialState
 
     deepFreeze(state)
     const newState = counterReducer(state, action)
-    expect(newState).toEqual({
-      good: 0,
-      ok: 0,
-      bad: 1
-    })
+    expect(newState).toEqual(action.payload)
   })
 
-  test('stats are resetted', () => {
+  test('stats are reset', () => {
     const action = {
-      type: 'ZERO'
+      type: 'ZERO',
+      payload: {
+        good: 0,
+        ok: 0,
+        bad: 0
+      }
     }
     const state = initialState
 
     deepFreeze(state)
     const newState = counterReducer(state, action)
-    expect(newState).toEqual({
-      good: 0,
-      ok: 0,
-      bad: 0
-    })
+    expect(newState).toEqual(action.payload)
   })
 })
