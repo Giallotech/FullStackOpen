@@ -4,20 +4,6 @@ import { setNotification } from '../reducers/notificationReducer';
 
 const AnecdoteList = () => {
   const dispatch = useDispatch();
-
-  const vote = (id) => {
-    dispatch(incrementVote(id));
-
-    // Find the anecdote from your state
-    const anecdote = anecdotes.find((anecdote) => anecdote.id === id);
-
-    if (anecdote) {
-      dispatch(setNotification(`You voted for '${anecdote.content}'`));
-    } else {
-      console.error(`No anecdote found with id: ${id}`);
-    }
-  };
-
   const anecdotes = useSelector((state) => {
     if (state.filter) {
       return state.anecdotes.filter((anecdote) =>
@@ -30,6 +16,18 @@ const AnecdoteList = () => {
 
   // We sort the anecdotes by the number of votes they have. In redux the state is immutable, so we need to create a copy of the array of anecdotes before sorting it.
   const sortedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes);
+
+  const vote = (id) => {
+    dispatch(incrementVote(id));
+
+    const anecdote = sortedAnecdotes.find((anecdote) => anecdote.id === id);
+
+    if (anecdote) {
+      dispatch(setNotification(`You voted for '${anecdote.content}'`));
+    } else {
+      console.error(`No anecdote found with id: ${id}`);
+    }
+  };
 
   return (
     <>
