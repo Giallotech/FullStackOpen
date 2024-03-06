@@ -44,13 +44,6 @@ const anecdoteReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'INCREMENT_VOTES': {
       const id = action.payload.id
-      // const anecdoteToChange = state.find((a) => a.id === id)
-      // const changedAnecdote = {
-      //   ...anecdoteToChange,
-      //   votes: anecdoteToChange.votes + 1
-      // }
-
-      // const anecdoteToChange = state.find(n => n.id === action.id)
       const anecdoteToChange = state.find((n) => n.id === id);
 
       if (!anecdoteToChange) {

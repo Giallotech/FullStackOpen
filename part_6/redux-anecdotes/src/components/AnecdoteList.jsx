@@ -1,9 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementVote } from '../reducers/anecdoteReducer';
-import {
-  setNotification,
-  clearNotification,
-} from '../reducers/notificationReducer';
+import { setNotification } from '../reducers/notificationReducer';
 
 const AnecdoteList = () => {
   const dispatch = useDispatch();
@@ -16,9 +13,6 @@ const AnecdoteList = () => {
 
     if (anecdote) {
       dispatch(setNotification(`You voted for '${anecdote.content}'`));
-      setTimeout(() => {
-        dispatch(clearNotification());
-      }, 5000);
     } else {
       console.error(`No anecdote found with id: ${id}`);
     }
