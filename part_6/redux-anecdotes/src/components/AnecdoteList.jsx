@@ -1,12 +1,27 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementVote } from '../reducers/anecdoteReducer';
+import {
+  setNotification,
+  clearNotification,
+} from '../reducers/notificationReducer';
 
 const AnecdoteList = () => {
   const dispatch = useDispatch();
 
   const vote = (id) => {
-    console.log('vote', id);
     dispatch(incrementVote(id));
+
+    // Find the anecdote from your state
+    const anecdote = anecdotes.find((anecdote) => anecdote.id === id);
+
+    if (anecdote) {
+      dispatch(setNotification(`You voted for '${anecdote.content}'`));
+      setTimeout(() => {
+        dispatch(clearNotification());
+      }, 5000);
+    } else {
+      console.error(`No anecdote found with id: ${id}`);
+    }
   };
 
   const anecdotes = useSelector((state) => {
