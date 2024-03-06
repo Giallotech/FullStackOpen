@@ -19,8 +19,8 @@ const AnecdoteList = () => {
     }
   });
 
-  // We sort the anecdotes by the number of votes they have
-  const sortedAnecdotes = anecdotes.sort((a, b) => b.votes - a.votes);
+  // We sort the anecdotes by the number of votes they have. In redux the state is immutable, so we need to create a copy of the array of anecdotes before sorting it.
+  const sortedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes);
 
   return (
     <>
