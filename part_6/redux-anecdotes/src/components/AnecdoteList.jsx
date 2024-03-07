@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { incrementVote } from '../reducers/anecdoteReducer';
-import { setNotification } from '../reducers/notificationReducer';
+import { incrementVotes } from '../reducers/anecdoteReducer';
+import { setNotificationWithTimeout } from '../reducers/notificationReducer';
 
 const AnecdoteList = () => {
   const dispatch = useDispatch();
@@ -18,12 +18,14 @@ const AnecdoteList = () => {
   const sortedAnecdotes = [...anecdotes].sort((a, b) => b.votes - a.votes);
 
   const vote = (id) => {
-    dispatch(incrementVote(id));
+    dispatch(incrementVotes(id));
 
     const anecdote = sortedAnecdotes.find((anecdote) => anecdote.id === id);
 
     if (anecdote) {
-      dispatch(setNotification(`You voted for '${anecdote.content}'`));
+      dispatch(
+        setNotificationWithTimeout(`you voted '${anecdote.content}'`, 5)
+      );
     } else {
       console.error(`No anecdote found with id: ${id}`);
     }
