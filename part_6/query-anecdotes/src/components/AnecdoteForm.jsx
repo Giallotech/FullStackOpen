@@ -9,6 +9,11 @@ const AnecdoteForm = () => {
 
   const newAnecdoteMutation = useMutation({
     mutationFn: createAnecdote,
+    onMutate: (newAnecdote) => {
+      if (newAnecdote.content.length < 5) {
+        throw new Error('Anecdote must be at least 5 characters long.');
+      }
+    },
     onSuccess: (newAnecdote) => {
       const anecdotes = queryClient.getQueryData(['anecdotes']);
       queryClient.setQueryData(['anecdotes'], anecdotes.concat(newAnecdote));
@@ -22,24 +27,22 @@ const AnecdoteForm = () => {
         5000
       );
     },
+    onError: (error) => {
+      notificationDispatch({
+        type: 'SET_NOTIFICATION',
+        notification: error.message,
+      });
+      setTimeout(
+        () => notificationDispatch({ type: 'CLEAR_NOTIFICATION' }),
+        5000
+      );
+    },
   });
 
   const onCreate = (event) => {
     event.preventDefault();
     const content = event.target.anecdote.value;
     event.target.anecdote.value = '';
-
-    if (content.length < 5) {
-      notificationDispatch({
-        type: 'SET_NOTIFICATION',
-        notification: 'Anecdote must be at least 5 characters long.',
-      });
-      setTimeout(
-        () => notificationDispatch({ type: 'CLEAR_NOTIFICATION' }),
-        5000
-      );
-      return;
-    }
 
     newAnecdoteMutation.mutate({ content });
   };
